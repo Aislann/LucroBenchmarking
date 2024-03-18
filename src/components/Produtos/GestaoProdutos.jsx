@@ -39,7 +39,7 @@ const GestaoProdutos = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://3.145.53.73:8002/api/GestaoProdutos');
+      const response = await axios.get('https://3.145.53.73:8002/api/GestaoProdutos');
       setDadosDaApi(response.data);
     } catch (error) {
       console.error('Erro ao buscar dados da API:', error);
@@ -49,7 +49,7 @@ const GestaoProdutos = () => {
   const handleDeletarProduto = async (idProduto, estadoProduto) => {
     try {
 
-        await axios.delete(`http://3.145.53.73:8002/api/GestaoProdutos/${idProduto}`);
+        await axios.delete(`https://3.145.53.73:8002/api/GestaoProdutos/${idProduto}`);
         const novosDados = dadosDaApi.filter(item => item.idProduto !== idProduto);
         setDadosDaApi(novosDados);
     } catch (error) {
@@ -77,7 +77,7 @@ const GestaoProdutos = () => {
 
   const handleEditarProduto = async (idProduto) => {
     try {
-      const response = await axios.get(`http://3.145.53.73:8002/api/GestaoProdutos/${idProduto}`);
+      const response = await axios.get(`https://3.145.53.73:8002/api/GestaoProdutos/${idProduto}`);
       setProdutoParaEditar(response.data);
       setModalIsOpen(true);
     } catch (error) {
@@ -96,7 +96,7 @@ const GestaoProdutos = () => {
 
   const handleSaveChanges = async () => {
     try {
-      await axios.put(`http://3.145.53.73:8002/api/GestaoProdutos/${produtoParaEditar.idProduto}`, produtoParaEditar);
+      await axios.put(`https://3.145.53.73:8002/api/GestaoProdutos/${produtoParaEditar.idProduto}`, produtoParaEditar);
       closeModal();
       window.location.reload();
     } catch (error) {
@@ -106,7 +106,7 @@ const GestaoProdutos = () => {
 
   const handleEnviarEmail = async () => {
     try {
-      await axios.get(`http://3.145.53.73:8002/api/GestaoProdutos/VerificarNovoProduto/${produtoSelecionado}`);
+      await axios.get(`https://3.145.53.73:8002/api/GestaoProdutos/VerificarNovoProduto/${produtoSelecionado}`);
       console.log('Email enviado com sucesso.');
       closeModal();
     } catch (error) {
@@ -125,7 +125,7 @@ const GestaoProdutos = () => {
   };
 
   useEffect(() => {
-    axios.get('http://3.145.53.73:8002/api/Email')
+    axios.get('https://3.145.53.73:8002/api/Email')
       .then(response => {
         if (response.data.length > 0) {
           setEmail(response.data[0].emailUsuario);
@@ -146,14 +146,14 @@ const GestaoProdutos = () => {
         estado: "play"
       };
 
-      await axios.post('http://3.145.53.73:8002/api/GestaoProdutos', novoProduto);
+      await axios.post('https://3.145.53.73:8002/api/GestaoProdutos', novoProduto);
 
-      const response = await axios.get(`http://3.145.53.73:8002/api/GestaoProdutos/${idProdutoLucro}`);
+      const response = await axios.get(`https://3.145.53.73:8002/api/GestaoProdutos/${idProdutoLucro}`);
       const produto = response.data;
 
       produto.preco = 700;
 
-      await axios.patch(`http://3.145.53.73:8002/api/GestaoProdutos/${idProdutoLucro}`, produto);
+      await axios.patch(`https://3.145.53.73:8002/api/GestaoProdutos/${idProdutoLucro}`, produto);
 
       console.log('Preço atualizado com sucesso.');
 
